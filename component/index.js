@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import {
     connectionToChatClosed,
     connectToChatFailed,
-    connectToChatRequested,
     connectToChatSucceeded,
     messageReceived,
     sendMessage
@@ -21,15 +20,12 @@ const mapStateToProps = ({ chatReducer }, { options, query }) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    connectToChat: async function () {
+    connectToChat: function () {
         const roomId = this.socketClient.getRoomId();
-
-        dispatch(connectToChatRequested(roomId));
-
         this.socketClient.onConnect(() => this.onConnection(roomId));
         this.socketClient.onDisconnect(() => this.onError(roomId));
         this.socketClient.onError(() => this.onDisconnection(roomId));
-    },
+        },
     /**
      * @param {string} roomId
      * */

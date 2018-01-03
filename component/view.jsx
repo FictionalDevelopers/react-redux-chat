@@ -14,7 +14,7 @@ class ChatView extends React.Component {
     }
 
     render() {
-        return this.props.render(this.props.chat.id, this.props.chat.messages, this.sendMessage);
+        return this.props.render(this.props.chat.roomId, this.props.chat.messages, this.sendMessage);
     }
 
     /**

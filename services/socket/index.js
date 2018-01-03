@@ -17,10 +17,9 @@ class SocketClient {
      * @param {Options} options
      * @param {object} [query]
      */
-    constructor({ options, query }) {
+    constructor({options, query}) {
         this.url = this.generateUrl(options.url, options.namespace);
-        this.roomId = this.generateId(this.url, query);
-        this.id = options.id || this.roomId;
+        this.roomId = this.generateRoomId(this.url, query);
         this.displayName = options.displayName || 'unknown';
 
         if (!sockets[this.roomId]) {
@@ -48,16 +47,19 @@ class SocketClient {
     /**
      * @param {string} url
      * @param {object} [query]
-     * @returns {string}
+     * @returns {string} roomId
      */
-    generateId = (url, query) => {
-        let id = url;
+    generateRoomId = (url, query) => {
+        let participants;
+        let roomId = url;
 
-        if (query && query.participants) {
-            id += '|' + query.participants.sort().join('|');
+        if (query && query.participants && Array.isArray(query.participants)) {
+            participants = [...query.participants];
+            participants.sort();
+            roomId += '|' + participants.join('|');
         }
 
-        return id;
+        return roomId;
     };
 
     /**
@@ -120,7 +122,7 @@ class SocketClient {
     sendMessage = (content, eventName = SocketClient.MESSAGE_EVENT_NAME) => {
         this.socket.emit(eventName, {
             from: {
-                id: this.id,
+                roomId: this.roomId,
                 displayName: this.displayName
             },
             content
