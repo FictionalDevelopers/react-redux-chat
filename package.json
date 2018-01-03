@@ -1,0 +1,25 @@
+{
+  "name": "react-redux-chat",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FictionalDevelopers/react-redux-chat.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FictionalDevelopers/react-redux-chat/issues"
+  },
+  "homepage": "https://github.com/FictionalDevelopers/react-redux-chat#readme",
+  "dependencies": {
+    "prop-types": "^15.6.0",
+    "react": "^16.2.0",
+    "react-redux": "^5.0.6",
+    "socket.io-client": "^2.0.4"
+  }
+}
